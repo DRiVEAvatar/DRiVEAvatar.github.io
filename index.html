@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="DRiVE: Diffusion-based Rigging Empowers Generation of Versatile and Expressive Characters">
+  <meta name="keywords" content="3D Character Generation, Rigging, Diffusion Model">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/avatar.png"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/video_comparison.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          
+          <!-- <h1 class="title is-1 publication-title">DRiVE: Diffusion-based Rigging Empowers Generation of Versatile and Expressive Characters</h1> -->
+
+          <h1 style="font-weight: bold; font-size: 2.5rem; line-height: 1.4;">
+            <a href="https://driveavatar.github.io/" target="_blank" style="text-decoration: none; color: inherit;">
+              <span class="title is-1 publication-title">DRiVE</span>:
+              <span style="text-decoration: underline; text-decoration-skip-ink: none;">D</span>iffusion-based 
+              <span style="text-decoration: underline; text-decoration-skip-ink: none;">Ri</span>gging Empowers Generation of 
+              <span style="text-decoration: underline; text-decoration-skip-ink: none;">V</span>ersatile and 
+              <span style="text-decoration: underline; text-decoration-skip-ink: none;">E</span>xpressive Characters
+            </a>
+          </h1>
+          
+          <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=TTW2mVoAAAAJ" target="_blank">Mingze Sun</a><sup> * 1</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=dEzL5pAAAAAJ&hl=en&oi=ao" target="_blank">Junting Dong</a><sup>* 2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=uVMnzPMAAAAJ" target="_blank">Junhao Chen</a><sup>* 1</sup>
+            </span>
+            <span class="author-block">
+              Yurun Chen<sup>1</sup>
+            </span>
+            <span class="author-block">
+              Xinyu Jiang<sup>1</sup>
+            </span>
+            
+            <span class="author-block">
+              Shiwei Mao<sup>1</sup>
+            </span>
+            <br>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=E-k3WcgAAAAJ&hl=en" target="_blank">Puhua Jiang</a><sup>1</sup>
+            </span>
+            
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=GStTsxAAAAAJ&hl=en" target="_blank">Jingbo Wang</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=KNWTvgEAAAAJ" target="_blank">Bo Dai</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=cgRY63gAAAAJ&hl=en" target="_blank">Ruqi Huang</a><sup>† 1</sup>
+            </span>
+          </div>
+
+          <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Tsinghua Shenzhen International Graduate School, China</span>
+            <span class="author-block"><sup>2</sup>Shanghai AI Laboratory, China</span>
+          </div>
+          <div class="is-size-6 has-text-centered" style="margin-top: 1rem;">
+            <sup>*</sup> Indicates Equal Contribution &nbsp;&nbsp;&nbsp;&nbsp; <sup>†</sup> Indicates Corresponding Author
+          </div>
+
+          
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/xxxx.xxxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/xxxx.xxxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=xxxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/xxxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/xxxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/drive_teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        We propose <span class="dnerf">DRiVE</span>, a pipeline that generates 3D Gaussian from a single image along with the corresponding skeleton (including hair and clothing) and skinning, enabling precise control over 3D Gaussian to render high-quality, controllable, and 3D consistent videos.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- text 2 anime showcase -->
+<style>
+  /* 外层容器样式 */
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 内部滑动容器 */
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  /* 单个视频项 */
+  .video-item {
+    flex: 0 0 300px;
+    margin-right: 20px;
+    text-align: center;
+  }
+
+  /* 视频与文字对齐 */
+  .video-item video,
+  .video-item .text-prompt {
+    width: 100%;
+    height: auto;
+  }
+
+  .text-prompt {
+    margin-top: 10px;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  /* 左右箭头按钮 */
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #333;
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .carousel-button.left {
+    left: -30px;
+  }
+  .carousel-button.right {
+    right: -30px;
+  }
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+</style>
+
+<section class="section" id="text2anime-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Text Input</h2>
+        <p class="content has-text-justified">
+          Explore how simple text descriptions transform into dynamic anime-style animations. Here are some examples of our model in action:
+        </p>
+      </div>
+    </div>
+
+    <!-- 左侧按钮 -->
+    <button class="carousel-button left" onclick="carouselScrollLeft()">&#9664;</button>
+
+    <div class="carousel-container">
+      <div class="carousel" id="carousel">
+        <!-- JavaScript 将在此处动态插入视频项 -->
+      </div>
+    </div>
+
+    <!-- 右侧按钮 -->
+    <button class="carousel-button right" onclick="carouselScrollRight()">&#9654;</button>
+  </div>
+</section>
+
+<script>
+  let currentIndex = 0;
+  let itemWidth;
+  let shuffledVideos = [];
+  let visibleItems;
+
+  fetch('./static/videos/text2anime/prompts.json')
+    .then(response => response.json())
+    .then(data => {
+      const carousel = document.getElementById('carousel');
+
+      data.forEach(entry => {
+        entry.videos.forEach(videoFile => {
+          shuffledVideos.push({
+            prompt: entry.prompt,
+            video: `./static/videos/text2anime/${videoFile}`
+          });
+        });
+      });
+
+      shuffledVideos = shuffledVideos.sort(() => Math.random() - 0.5);
+
+      shuffledVideos.forEach(item => {
+        const videoItem = document.createElement('div');
+        videoItem.classList.add('video-item');
+
+        const videoElement = document.createElement('video');
+        videoElement.src = item.video;
+        videoElement.autoplay = true;
+        videoElement.muted = true;
+        videoElement.loop = true;
+        videoElement.playsInline = true;
+
+        const textPrompt = document.createElement('div');
+        textPrompt.classList.add('text-prompt');
+        textPrompt.textContent = item.prompt;
+
+        videoItem.appendChild(videoElement);
+        videoItem.appendChild(textPrompt);
+
+        carousel.appendChild(videoItem);
+      });
+
+      // 在视频项加载完成后，更新itemWidth和visibleItems
+      const carouselContainer = document.querySelector('.carousel-container');
+      const containerWidth = carouselContainer.offsetWidth;
+
+      itemWidth = document.querySelector('.video-item').offsetWidth;
+      visibleItems = Math.floor(containerWidth / itemWidth);
+
+      // 自动滚动效果
+      setInterval(() => {
+        carouselScrollRight();
+      }, 5000);
+    })
+    .catch(error => console.error('Error loading video prompts:', error));
+
+    function carouselScrollLeft() {
+      const maxIndex = shuffledVideos.length - visibleItems;
+      currentIndex = (currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
+      updateCarouselPosition();
+    }
+
+
+    function carouselScrollRight() {
+      const maxIndex = shuffledVideos.length - visibleItems;
+      currentIndex = (currentIndex + 1) % (maxIndex + 1);
+      updateCarouselPosition();
+    }
+
+
+  function updateCarouselPosition() {
+    const carousel = document.getElementById('carousel');
+    const offset = -currentIndex * (itemWidth + 20); // 如果保留margin-right
+    carousel.style.transform = `translateX(${offset}px)`;
+  }
+
+  // 窗口大小改变时，重新计算visibleItems
+  window.addEventListener('resize', () => {
+    const carouselContainer = document.querySelector('.carousel-container');
+    const containerWidth = carouselContainer.offsetWidth;
+    itemWidth = document.querySelector('.video-item').offsetWidth;
+    visibleItems = Math.floor(containerWidth / itemWidth);
+
+    // 更新位置，防止出现空白
+    updateCarouselPosition();
+  });
+</script>
+
+
+<!-- anime 2 anime -->
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Anypose Anime Input</h2>
+
+        <div class="row" style="margin-bottom: 0px;">
+          <div class="col-xs-15 compare-title " style="width: 20%">
+            <p class="small-text">Input Image</p>
+          </div>
+          <div class="col-xs-15 compare-title " style="width: 20%">
+            <div class="title-text">
+              <p class="small-text">
+                Ours
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-15 compare-title " style="width: 20%">
+            <p class="small-text">CharacterGen</p>
+          </div>
+          <div class="col-xs-15 compare-title " style="width: 20%">
+            <p class="small-text">ImageDream</p>
+          </div>
+          <div class="col-xs-15 compare-title " style="width: 20%">
+            <p class="small-text">Magic123</p>
+          </div>
+
+          <div id="content-container"></div>
+
+          <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                  const container = document.getElementById('content-container');
+                  for (let i = 1; i <= 10; i++) {
+                      if(i == 3) continue;
+                      if(i == 5) continue;
+                      if(i == 7) continue;
+                      if(i == 10) continue;
+                      const imageSrc = `./static/images/3da/${i}.png`;
+                      const videoSrc = `./static/videos/3da/output_${i}.mp4`;
+
+                      const htmlContent = `
+                        <div class="col-xs-15">
+                          <img src="${imageSrc}" alt="${i}.png" style="width: 60%">
+                        </div>
+                        <video class="video lazy" loop playsinline autoplay muted style="width: 512px">
+                            <source src="${videoSrc}" type="video/mp4"></source>
+                        </video>
+                      </div>
+                      `;
+
+                      container.innerHTML += htmlContent;
+                  }
+                const videos = document.querySelectorAll('.video');
+
+                // 为每个视频添加事件监听器，以确保它们加载完成
+              //videos.forEach(video => {
+              //  video.onloadeddata = function () {
+              //    // 检查所有视频是否准备就绪
+              //    const allReady = Array.from(videos).every(v => v.readyState >= 3); // 3 表示 HAVE_FUTURE_DATA，即当前位置和未来的几帧已经下载好
+              //    if (allReady) {
+              //      // 所有视频都准备好了，开始播放
+              //      videos.forEach(v => v.play());
+              //    }
+              //  };
+              //});
+              });
+          </script>
+        </div>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+</section>
+
+
+<!-- bibtex -->
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>...</code></pre>
+  </div>
+</section>
+
+<!-- footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
