@@ -2,11 +2,14 @@
 
 If you find Nerfies useful for your work please cite:
 ```
-@article{sun2024drive
-  author    = {Mingze Sun, Junting Dong, Junhao Chen, Yurun Chen, Xinyu Jiang, Shiwei Mao, Puhua Jiang, Jingbo Wang, Bo Dai, Ruqi Huang},
-  title     = {DRiVE: Diffusion-based Rigging Empowers Generation of Versatile and Expressive Characters},
-  journal   = {arxiv},
-  year      = {2024},
+@article{sun2024drivediffusionbasedriggingempowers,
+      title={DRiVE: Diffusion-based Rigging Empowers Generation of Versatile and Expressive Characters}, 
+      author={Mingze Sun and Junhao Chen and Junting Dong and Yurun Chen and Xinyu Jiang and Shiwei Mao and Puhua Jiang and Jingbo Wang and Bo Dai and Ruqi Huang},
+      year={2024},
+      eprint={2411.17423},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2411.17423}, 
 }
 ```
 
