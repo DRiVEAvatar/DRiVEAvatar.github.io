@@ -1,6 +1,6 @@
 # DRiVEAvatar.github.io
 
-If you find Nerfies useful for your work please cite:
+If you find DRiVE useful for your work please cite:
 ```
 @article{sun2024drivediffusionbasedriggingempowers,
       title={DRiVE: Diffusion-based Rigging Empowers Generation of Versatile and Expressive Characters}, 
