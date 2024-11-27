@@ -160,26 +160,26 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/xxxx.xxxxx"
+                <a href="https://arxiv.org/pdf/2411.17423v1"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Paper (coming soon)</span>
+                  <span>Paper</span>
                 </a>
               </span>
-              <!-- <span class="link-block">
-                <a href="https://arxiv.org/abs/xxxx.xxxxx"
+              <span class="link-block">
+                <a href="http://arxiv.org/abs/2411.17423v1"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv (coming soon)</span>
+                  <span>arXiv</span>
                 </a>
-              </span> -->
+              </span>
               <!-- Video Link. -->
               <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=xxxxx"
+                <a href="https://github.com/DRiVEAvatar/DRiVEAvatar.github.io"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
@@ -411,14 +411,127 @@
 </script>
 
 
-<!-- anime 2 anime -->
+<!-- 
+<script>
+  let currentIndex = 0;
+  let itemWidth;
+  let shuffledVideos = [];
+  let visibleItems;
+
+  const bufferItems = 2; // 缓冲区数量
+
+  fetch('./static/videos/text2anime/prompts.json')
+    .then(response => response.json())
+    .then(data => {
+      const carousel = document.getElementById('carousel');
+
+      data.forEach(entry => {
+        entry.videos.forEach(videoFile => {
+          shuffledVideos.push({
+            prompt: entry.prompt,
+            video: `./static/videos/text2anime/${videoFile}`
+          });
+        });
+      });
+
+      shuffledVideos = shuffledVideos.sort(() => Math.random() - 0.5);
+
+      shuffledVideos.forEach((item, index) => {
+        const videoItem = document.createElement('div');
+        videoItem.classList.add('video-item');
+
+        const videoElement = document.createElement('video');
+        videoElement.dataset.src = item.video; // 懒加载视频路径
+        videoElement.autoplay = true;
+        videoElement.muted = true;
+        videoElement.loop = true;
+        videoElement.playsInline = true;
+
+        const textPrompt = document.createElement('div');
+        textPrompt.classList.add('text-prompt');
+        textPrompt.textContent = item.prompt;
+
+        videoItem.appendChild(videoElement);
+        videoItem.appendChild(textPrompt);
+
+        carousel.appendChild(videoItem);
+      });
+
+      // 更新itemWidth和visibleItems
+      const carouselContainer = document.querySelector('.carousel-container');
+      const containerWidth = carouselContainer.offsetWidth;
+
+      itemWidth = document.querySelector('.video-item').offsetWidth;
+      visibleItems = Math.floor(containerWidth / itemWidth);
+
+      // 初次加载可见范围内的视频
+      lazyLoadVideos();
+
+      // 自动滚动效果
+      setInterval(() => {
+        carouselScrollRight();
+      }, 5000);
+    })
+    .catch(error => console.error('Error loading video prompts:', error));
+
+  function carouselScrollLeft() {
+    const maxIndex = shuffledVideos.length - visibleItems;
+    currentIndex = (currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
+    updateCarouselPosition();
+  }
+
+  function carouselScrollRight() {
+    const maxIndex = shuffledVideos.length - visibleItems;
+    currentIndex = (currentIndex + 1) % (maxIndex + 1);
+    updateCarouselPosition();
+  }
+
+  function updateCarouselPosition() {
+    const carousel = document.getElementById('carousel');
+    const offset = -currentIndex * (itemWidth + 20); // 包含margin
+    carousel.style.transform = `translateX(${offset}px)`;
+    lazyLoadVideos(); // 更新可见视频加载
+  }
+
+  // 懒加载视频函数
+  function lazyLoadVideos() {
+    const carouselItems = document.querySelectorAll('.video-item');
+
+    carouselItems.forEach((item, index) => {
+      if (index >= currentIndex && index < currentIndex + visibleItems + bufferItems) {
+        const video = item.querySelector('video');
+        if (video.dataset.src) {
+          video.src = video.dataset.src;
+          video.removeAttribute('data-src'); // 移除懒加载标志
+        }
+      }
+    });
+  }
+
+  // 窗口大小改变时重新计算visibleItems
+  window.addEventListener('resize', () => {
+    const carouselContainer = document.querySelector('.carousel-container');
+    const containerWidth = carouselContainer.offsetWidth;
+    itemWidth = document.querySelector('.video-item').offsetWidth;
+    visibleItems = Math.floor(containerWidth / itemWidth);
+
+    updateCarouselPosition(); // 更新位置
+  });
+</script> -->
+
+
+<!--anypose anime 2 anime -->
 <section class="section">
   <div class="container is-max-desktop">
 
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Anypose Anime Input</h2>
+        <h2 class="title is-3">Any Pose Anime Input</h2>
+        
+        <!-- 这里放ours 的结果 -->
+        
 
+        <!-- 和 charactergen 的比较 -->
         <div class="row" style="margin-bottom: 0px;">
           <div class="col-xs-15 compare-title " style="width: 20%">
             <p class="small-text">Input Image</p>
@@ -494,12 +607,15 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{sun2024drive
-        author    = {Mingze Sun, Junting Dong, Junhao Chen, Yurun Chen, Xinyu Jiang, Shiwei Mao, Puhua Jiang, Jingbo Wang, Bo Dai, Ruqi Huang},
-        title     = {DRiVE: Diffusion-based Rigging Empowers Generation of Versatile and Expressive Characters},
-        journal   = {arxiv},
-        year      = {2024},
-      }</code></pre>
+    <pre><code>@article{sun2024drivediffusionbasedriggingempowers,
+      title={DRiVE: Diffusion-based Rigging Empowers Generation of Versatile and Expressive Characters}, 
+      author={Mingze Sun and Junhao Chen and Junting Dong and Yurun Chen and Xinyu Jiang and Shiwei Mao and Puhua Jiang and Jingbo Wang and Bo Dai and Ruqi Huang},
+      year={2024},
+      eprint={2411.17423},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2411.17423}, 
+}</code></pre>
   </div>
 </section>
 

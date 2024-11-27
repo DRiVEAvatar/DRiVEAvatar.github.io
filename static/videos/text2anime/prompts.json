@@ -32,10 +32,6 @@
       "videos": ["a6c37a8d-5dd5-4378-9137-6c1bee89a0ed.mp4","77870c99-e828-48c3-8fec-957153f9409f.mp4","064c4bbd-1d45-44f8-a087-2162118e66cb.mp4", "6f90863b-03a5-4b36-9829-c64cefd52228.mp4"]
     },
     {
-      "prompt": "A woman resembling Lady Gaga, with short platinum blonde hair, bold makeup, and an edgy outfit made of unconventional materials, exuding a sense of fearless creativity and pop-art glamour.",
-      "videos": ["b5da2ab3-1895-4479-b147-c8741ac666e6.mp4"]
-    },
-    {
       "prompt": "A woman resembling Marilyn Monroe, with platinum blonde curls, red lipstick, and a glamorous smile, dressed in a white halter dress and high heels, exuding classic Hollywood glamour.",
       "videos": ["a7f23521-cc14-4167-9afc-1aacf165024e.mp4","a0d0edc5-9a44-49b0-bc31-6cf9b87ef9e3.mp4","89061922-05fe-4a67-9999-0f0904113da9.mp4","39635800-d12b-4862-82cc-8bcc3ddcf197.mp4","35166346-2f74-4596-8521-5f6a15275339.mp4","4828df6d-3143-4b8f-8b02-09cca3fb4897.mp4","228dafee-baac-45b7-9a8a-18a9be7d23e4.mp4"]
     },
@@ -57,7 +53,7 @@
     },
     {
       "prompt": "A woman resembling Taylor Swift, with long blonde hair styled in loose waves, bright red lipstick, and a confident smile, dressed in a sparkly mini dress with high heels, exuding a glamorous pop star vibe.",
-      "videos": ["f373f272-94f5-4ecd-9f4c-53ad51157144.mp4","11a01d57-89df-4005-820b-0e0d6790721c.mp4", "11.mp4", "0c68ff11-89be-4866-819d-fd73a66a8135.mp4", "1b12ade9-464e-40ea-bf0b-a32f2c678302.mp4", "1e66a040-5fcc-438f-a7e1-d1d07017146e.mp4", "5a55cd92-96ce-4da0-acc5-e4e511161c43.mp4"]
+      "videos": ["f373f272-94f5-4ecd-9f4c-53ad51157144.mp4", "11.mp4", "0c68ff11-89be-4866-819d-fd73a66a8135.mp4", "1b12ade9-464e-40ea-bf0b-a32f2c678302.mp4", "1e66a040-5fcc-438f-a7e1-d1d07017146e.mp4"]
     },
     {
       "prompt": "A young boy in a green t-shirt with a dinosaur print and blue shorts, with short, spiky black hair and brown eyes.",
@@ -74,6 +70,296 @@
     {
       "prompt": "An elderly woman in a purple cardigan and gray skirt, with curly silver hair and reading glasses.",
       "videos": ["7314c8da-1c74-4a52-8792-68a465e1273c.mp4","19ab39f3-f558-42ca-acc3-355b7b26b398.mp4"]
+    },
+    {
+      "prompt": "A man in a black tuxedo with a red bow tie, clean-shaven with neatly combed hair.",
+      "videos": [
+          "046-003-Anime.mp4"
+      ]
+    },
+    {
+        "prompt": "A young man wearing a navy hoodie and light gray sweatpants, with short, curly black hair and brown eyes.",
+        "videos": [
+            "036-003-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "An elderly woman in a white blouse and a long plaid skirt, with short silver hair and a pair of small round glasses.",
+        "videos": [
+            "015-002-Anime.mp4",
+            "015-004-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A teenage girl in a blue sweatshirt and white sneakers, with long straight hair dyed purple and wearing a headband.",
+        "videos": [
+            "018-003-Anime.mp4",
+            "018-004-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in a military uniform with medals on his chest and a sharp haircut.",
+        "videos": [
+            "049-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "Unknown prompt",
+        "videos": [
+            "13903-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in a painter\u2019s smock with splattered paint, holding a brush and canvas.",
+        "videos": [
+            "095-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A girl in a ballet costume with a pink tutu, hair tied into a neat bun, wearing ballet slippers.",
+        "videos": [
+            "048-004-Anime.mp4",
+            "048-002-Anime.mp4",
+            "048-005-Anime.mp4",
+            "048-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman in a winter coat with a fur-lined hood, holding a cup of coffee.",
+        "videos": [
+            "065-02Anime.mp4",
+            "065-01-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in a magician\u2019s outfit with a cape and top hat, holding a deck of cards.",
+        "videos": [
+            "085-01Anime.mp4",
+            "085-02Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A boy in a racing suit with gloves and a helmet under his arm.",
+        "videos": [
+            "094-1Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman wearing a purple blouse and a black skirt, with short curly auburn hair and a silver necklace.",
+        "videos": [
+            "009-01-Anime.mp4",
+            "009-05-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A young woman in a red and white athletic outfit, with a high ponytail and a confident smile.",
+        "videos": [
+            "012-002-Anime.mp4",
+            "012-003-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in a chef\u2019s uniform, with a tall white hat and a red neckerchief.",
+        "videos": [
+            "059-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman in a cocktail dress with high heels, wearing a silver bracelet and earrings.",
+        "videos": [
+            "062-002-Anime.mp4",
+            "062-1-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A young woman in a yellow sundress with white polka dots, wearing sandals, with long wavy brown hair and hazel eyes.",
+        "videos": [
+            "021-005-Anime.mp4",
+            "021-004-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A middle-aged man in a gray sweater and khaki trousers, with short black hair and a neatly trimmed beard.",
+        "videos": [
+            "022-004-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A young man in a vintage suit with suspenders, holding a pocket watch.",
+        "videos": [
+            "076-001Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in a detective\u2019s trench coat and hat, holding a magnifying glass.",
+        "videos": [
+            "072-01-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A teenage girl in a purple tracksuit, with a high ponytail and black sneakers.",
+        "videos": [
+            "041-004-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in a mechanic's jumpsuit, with grease-stained hands and a friendly smile.",
+        "videos": [
+            "053-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman in a pink tracksuit, holding a water bottle, with braided hair.",
+        "videos": [
+            "057-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in an explorer\u2019s outfit, holding a map and looking excited.",
+        "videos": [
+            "116-2Anime.mp4",
+            "116-1Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman in a casual blazer, wearing glasses and holding a laptop bag.",
+        "videos": [
+            "104-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman in a nurse\u2019s uniform with a soft smile and neatly tied back brown hair.",
+        "videos": [
+            "050-001-Anime.mp4",
+            "050-002-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in a white chef\u2019s coat and black pants, with a tall chef\u2019s hat and short gray hair.",
+        "videos": [
+            "031-002-Anime.mp4",
+            "031-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman wearing a casual sweater, ripped jeans, and white sneakers, with shoulder-length ombre hair.",
+        "videos": [
+            "054-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in a zookeeper uniform, holding a baby animal and smiling.",
+        "videos": [
+            "092-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman in a red evening gown with a diamond necklace, with long wavy black hair and a confident expression.",
+        "videos": [
+            "019-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A young man in a black turtleneck sweater and dark gray trousers, with medium-length blond hair and glasses.",
+        "videos": [
+            "005-01-Anime.mp4",
+            "005-04-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in an archaeologist\u2019s outfit, holding a dusty artifact.",
+        "videos": [
+            "128-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "An elderly man in a brown cardigan and beige trousers, with thin gray hair and a walking cane.",
+        "videos": [
+            "024-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A young woman wearing a denim jacket over a floral sundress, with short curly hair and a bright smile.",
+        "videos": [
+            "047-004-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A teenage boy wearing a green varsity jacket and dark blue jeans, with short, spiky blonde hair and brown eyes.",
+        "videos": [
+            "023-002-Anime.mp4",
+            "023-004-Anime.mp4",
+            "023-005-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A young boy in a soccer uniform with knee-high socks and cleats, holding a soccer ball.",
+        "videos": [
+            "051-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A girl in a gymnastics leotard, standing on one foot with arms raised.",
+        "videos": [
+            "084-1Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman in a red evening gown, with a pearl necklace and long black gloves, styled with a sleek updo.",
+        "videos": [
+            "043-002-Anime.mp4",
+            "043-005-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A man in a lumberjack outfit, carrying an axe and wearing a plaid shirt.",
+        "videos": [
+            "126-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "Amelia Earhart standing beside her airplane, wearing a leather flight jacket, goggles, and a confident smile.",
+        "videos": [
+            "195-1Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A girl in a traditional sari, with gold bangles and a matching necklace.",
+        "videos": [
+            "107-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A girl in a school uniform with a navy blue skirt, a white shirt, and a red ribbon, with straight black hair tied into pigtails.",
+        "videos": [
+            "033-002-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman in a business suit with a white blouse and gray blazer, holding a leather briefcase.",
+        "videos": [
+            "052-001-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A middle-aged woman wearing a floral maxi dress with a denim jacket, with shoulder-length brown hair and soft green eyes.",
+        "videos": [
+            "013-002-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman in a black turtleneck and jeans, with a DSLR camera around her neck.",
+        "videos": [
+            "100-Anime.mp4"
+        ]
+    },
+    {
+        "prompt": "A woman in a bright yellow raincoat and galoshes, holding a bouquet of sunflowers.",
+        "videos": [
+            "082-01-Anime.mp4",
+            "082-Anime.mp4"
+        ]
     }
+
   ]
   
