@@ -270,7 +270,7 @@
   /* 内部滑动容器 */
   .carousel {
     display: flex;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease-in-out;
   }
 
   /* 单个视频项 */
@@ -311,11 +311,6 @@
   .carousel-button.right {
     right: -30px;
   }
-  .carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-
 </style>
 
 <!-- Text2Anime 部分 -->
@@ -371,82 +366,186 @@
     <button class="carousel-button right" onclick="carouselScrollRight('tposeanime')">&#9654;</button>
   </div>
 </section>
+<!-- 
+<script>
+let text2anime_currentIndex = 0;
+let text2anime_itemWidth;
+let text2anime_visibleItems;
+let tposeanime_currentIndex = 0;
+let tposeanime_itemWidth;
+let tposeanime_visibleItems;
 
+document.addEventListener('DOMContentLoaded', function () {
+  // 加载 Text2Anime 数据并填充视频项
+  fetch('./static/videos/text2anime/prompts.json')
+    .then(response => response.json())
+    .then(data => {
+      const carouselText2Anime = document.getElementById('carousel-text2anime');
+      const shuffledData = data.sort(() => Math.random() - 0.5);
 
-<style>
-  /* 外层容器样式 */
-  .carousel-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+      shuffledData.forEach(entry => {
+        entry.videos.forEach(videoFile => {
+          const videoItem = document.createElement('div');
+          videoItem.classList.add('video-item');
+
+          const videoElement = document.createElement('video');
+          videoElement.src = `./static/videos/text2anime/${videoFile}`;
+          videoElement.autoplay = true;
+          videoElement.muted = true;
+          videoElement.loop = true;
+          videoElement.playsInline = true;
+
+          const textPrompt = document.createElement('div');
+          textPrompt.classList.add('text-prompt');
+          textPrompt.textContent = entry.prompt;
+
+          videoItem.appendChild(videoElement);
+          videoItem.appendChild(textPrompt);
+          carouselText2Anime.appendChild(videoItem);
+        });
+      });
+
+      // 等待所有元素渲染完成后再计算尺寸
+      setTimeout(() => {
+        const carouselContainer = document.querySelector('.carousel-container');
+        updateText2AnimeDimensions(carouselContainer);
+        setInterval(() => {
+          carouselScrollRight('text2anime');
+        }, 5000);
+      }, 100);  // 等待 100 毫秒，确保所有项目渲染完成
+    })
+    .catch(error => console.error('Error loading video prompts:', error));
+
+  // 加载 TposeAnime 数据并填充图片与视频项
+  const container = document.querySelector("#anime-image-input .carousel");
+  const totalExamples = 16;  // 你可以根据实际情况调整这个值
+  for (let i = 1; i <= totalExamples; i++) {
+    const videoItem = document.createElement('div');
+    videoItem.classList.add('video-item');
+
+    const figure = document.createElement("figure");
+    figure.classList.add("image");
+
+    const img = document.createElement("img");
+    img.src = `./static/images/Tpose_anime_inputs/${i}.png`;
+    img.alt = `Input Image ${i}`;
+
+    figure.appendChild(img);
+
+    const video = document.createElement("video");
+    video.loop = true;
+    video.autoplay = true;
+    video.muted = true;
+    video.playsInline = true;
+
+    const source = document.createElement("source");
+    source.src = `./static/images/Tpose_anime_inputs/${i}.mp4`;
+    source.type = "video/mp4";
+
+    video.appendChild(source);
+
+    videoItem.appendChild(figure);
+    videoItem.appendChild(video);
+
+    container.appendChild(videoItem);
   }
 
-  /* 内部滑动容器 */
-  .carousel {
-    display: flex;
-    transition: transform 0.5s ease;
+  setTimeout(() => {
+    const carouselContainerTpose = document.querySelector('#anime-image-input .carousel-container');
+    updateTposeAnimeDimensions(carouselContainerTpose);
+    setInterval(() => {
+      carouselScrollRight('tposeanime');
+    }, 5000);
+  }, 100);  // 等待 100 毫秒，确保所有项目渲染完成
+});
+
+
+function updateText2AnimeDimensions(carouselContainer) {
+  text2anime_itemWidth = document.querySelector('.video-item').offsetWidth;
+  console.log('Item Width:', text2anime_itemWidth);  // 打印每个项的宽度
+  text2anime_visibleItems = Math.floor(carouselContainer.offsetWidth / text2anime_itemWidth);
+  console.log('Visible Items:', text2anime_visibleItems);  // 打印可见项数量
+  updateCarouselPosition('text2anime');
+}
+
+function updateTposeAnimeDimensions(carouselContainer) {
+  tposeanime_itemWidth = document.querySelector('.video-item').offsetWidth;
+  console.log('Item Width:', tposeanime_itemWidth);  // 打印每个项的宽度
+  tposeanime_visibleItems = Math.floor(carouselContainer.offsetWidth / tposeanime_itemWidth);
+  console.log('Visible Items:', tposeanime_visibleItems);  // 打印可见项数量
+  updateCarouselPosition('tposeanime');
+}
+
+// 滑动到左侧
+function carouselScrollLeft(type) {
+  let maxIndex, currentIndex;
+  if (type === 'text2anime') {
+    maxIndex = text2anime_visibleItems - 1;
+    text2anime_currentIndex = (text2anime_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
+    currentIndex = text2anime_currentIndex;
+  } else if (type === 'tposeanime') {
+    maxIndex = tposeanime_visibleItems - 1;
+    tposeanime_currentIndex = (tposeanime_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
+    currentIndex = tposeanime_currentIndex;
   }
+  updateCarouselPosition(type, currentIndex);
+}
 
-  /* 单个视频项 */
-  .video-item {
-    flex: 0 0 300px;
-    margin-right: 20px;
-    text-align: center;
+// 滑动到右侧
+function carouselScrollRight(type) {
+  let maxIndex, currentIndex;
+  if (type === 'text2anime') {
+    maxIndex = text2anime_visibleItems - 1;
+    text2anime_currentIndex = (text2anime_currentIndex + 1) % (maxIndex + 1);
+    currentIndex = text2anime_currentIndex;
+  } else if (type === 'tposeanime') {
+    maxIndex = tposeanime_visibleItems - 1;
+    tposeanime_currentIndex = (tposeanime_currentIndex + 1) % (maxIndex + 1);
+    currentIndex = tposeanime_currentIndex;
   }
+  updateCarouselPosition(type, currentIndex);
+}
 
-  /* 图片和视频对齐 */
-  .video-item img,
-  .video-item video {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
+// 更新 Carousel 位置
+function updateCarouselPosition(type, currentIndex) {
+  let carousel, itemWidth;
+  if (type === 'text2anime') {
+    carousel = document.getElementById('carousel-text2anime');
+    itemWidth = text2anime_itemWidth;
+  } else if (type === 'tposeanime') {
+    carousel = document.getElementById('carousel-tposeanime');
+    itemWidth = tposeanime_itemWidth;
   }
+  const offset = -currentIndex * (itemWidth + 20); // 包括 margin-right
+  carousel.style.transform = `translateX(${offset}px)`;
+}
 
-  /* 左右箭头按钮 */
-  .carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    color: #333;
-    background: rgba(255, 255, 255, 0.7);
-    border: none;
-    cursor: pointer;
-    z-index: 10;
-  }
-  .carousel-button.left {
-    left: -30px;
-  }
-  .carousel-button.right {
-    right: -30px;
-  }
+// 监听窗口大小变化
+window.addEventListener('resize', () => {
+  const carouselContainerText2Anime = document.querySelector('.carousel-container');
+  updateText2AnimeDimensions(carouselContainerText2Anime);
 
-</style>
+  const carouselContainerTpose = document.querySelector('#anime-image-input .carousel-container');
+  updateTposeAnimeDimensions(carouselContainerTpose);
+});
+</script> -->
 
 
-
+  
 <script>
   let text2anime_currentIndex = 0;
   let text2anime_itemWidth;
   let text2anime_visibleItems;
-  
   let tposeanime_currentIndex = 0;
   let tposeanime_itemWidth;
   let tposeanime_visibleItems;
   
   document.addEventListener('DOMContentLoaded', function () {
-    // Text2Anime 部分加载
+    // 加载 Text2Anime 数据并填充视频项
     fetch('./static/videos/text2anime/prompts.json')
       .then(response => response.json())
       .then(data => {
         const carouselText2Anime = document.getElementById('carousel-text2anime');
-  
-        // 随机打乱 JSON 数据中的案例顺序
         const shuffledData = data.sort(() => Math.random() - 0.5);
   
         shuffledData.forEach(entry => {
@@ -471,20 +570,20 @@
           });
         });
   
-        // 更新 visibleItems 和 itemWidth
-        const carouselContainer = document.querySelector('.carousel-container');
-        text2anime_itemWidth = document.querySelector('.video-item').offsetWidth;
-        text2anime_visibleItems = Math.floor(carouselContainer.offsetWidth / text2anime_itemWidth);
-  
-        setInterval(() => {
-          carouselScrollRight('text2anime');
-        }, 5000);
+        // 等待所有元素渲染完成后再计算尺寸
+        setTimeout(() => {
+          const carouselContainer = document.querySelector('.carousel-container');
+          updateText2AnimeDimensions(carouselContainer);
+          setInterval(() => {
+            carouselScrollRight('text2anime');
+          }, 5000);
+        }, 100);  // 等待 100 毫秒，确保所有项目渲染完成
       })
       .catch(error => console.error('Error loading video prompts:', error));
   
-    // TposeAnime 部分加载
+    // 加载 TposeAnime 数据并填充图片与视频项
     const container = document.querySelector("#anime-image-input .carousel");
-    const totalExamples = 16;
+    const totalExamples = 16;  // 你可以根据实际情况调整这个值
     for (let i = 1; i <= totalExamples; i++) {
       const videoItem = document.createElement('div');
       videoItem.classList.add('video-item');
@@ -516,73 +615,71 @@
       container.appendChild(videoItem);
     }
   
-    // 更新 TposeAnime 部分的 itemWidth 和 visibleItems
-    const carouselContainerTpose = document.querySelector('#anime-image-input .carousel-container');
-    tposeanime_itemWidth = document.querySelector('.video-item').offsetWidth;
-    tposeanime_visibleItems = Math.floor(carouselContainerTpose.offsetWidth / tposeanime_itemWidth);
-  
-    setInterval(() => {
-      carouselScrollRight('tposeanime');
-    }, 5000);
+    setTimeout(() => {
+      const carouselContainerTpose = document.querySelector('#anime-image-input .carousel-container');
+      updateTposeAnimeDimensions(carouselContainerTpose);
+      setInterval(() => {
+        carouselScrollRight('tposeanime');
+      }, 5000);
+    }, 100);  // 等待 100 毫秒，确保所有项目渲染完成
   });
   
+  function updateText2AnimeDimensions(carouselContainer) {
+    // 重新计算每个项目的宽度，并获取容器可见项数
+    text2anime_itemWidth = document.querySelector('.video-item').offsetWidth;
+    text2anime_visibleItems = Math.floor(carouselContainer.offsetWidth / text2anime_itemWidth);
+    updateCarouselPosition('text2anime');
+  }
+  
+  function updateTposeAnimeDimensions(carouselContainer) {
+    // 重新计算每个项目的宽度，并获取容器可见项数
+    tposeanime_itemWidth = document.querySelector('.video-item').offsetWidth;
+    tposeanime_visibleItems = Math.floor(carouselContainer.offsetWidth / tposeanime_itemWidth);
+    updateCarouselPosition('tposeanime');
+  }
+  
   function carouselScrollLeft(type) {
+    let maxIndex, currentIndex;
     if (type === 'text2anime') {
-      const maxIndex = text2anime_visibleItems - 1;
+      maxIndex = document.querySelectorAll('#carousel-text2anime .video-item').length - text2anime_visibleItems;
       text2anime_currentIndex = (text2anime_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
-      updateCarouselPosition('text2anime');
+      currentIndex = text2anime_currentIndex;
     } else if (type === 'tposeanime') {
-      const maxIndex = tposeanime_visibleItems - 1;
+      maxIndex = document.querySelectorAll('#carousel-tposeanime .video-item').length - tposeanime_visibleItems;
       tposeanime_currentIndex = (tposeanime_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
-      updateCarouselPosition('tposeanime');
+      currentIndex = tposeanime_currentIndex;
     }
+    updateCarouselPosition(type, currentIndex);
   }
   
   function carouselScrollRight(type) {
+    let maxIndex, currentIndex;
     if (type === 'text2anime') {
-      const maxIndex = text2anime_visibleItems - 1;
+      maxIndex = document.querySelectorAll('#carousel-text2anime .video-item').length - text2anime_visibleItems;
       text2anime_currentIndex = (text2anime_currentIndex + 1) % (maxIndex + 1);
-      updateCarouselPosition('text2anime');
+      currentIndex = text2anime_currentIndex;
     } else if (type === 'tposeanime') {
-      const maxIndex = tposeanime_visibleItems - 1;
+      maxIndex = document.querySelectorAll('#carousel-tposeanime .video-item').length - tposeanime_visibleItems;
       tposeanime_currentIndex = (tposeanime_currentIndex + 1) % (maxIndex + 1);
-      updateCarouselPosition('tposeanime');
+      currentIndex = tposeanime_currentIndex;
     }
+    updateCarouselPosition(type, currentIndex);
   }
   
-  function updateCarouselPosition(type) {
-    let carousel;
-    let currentIndex;
-    let itemWidth;
+  function updateCarouselPosition(type, currentIndex) {
+    let carousel, itemWidth;
     if (type === 'text2anime') {
       carousel = document.getElementById('carousel-text2anime');
-      currentIndex = text2anime_currentIndex;
       itemWidth = text2anime_itemWidth;
     } else if (type === 'tposeanime') {
       carousel = document.getElementById('carousel-tposeanime');
-      currentIndex = tposeanime_currentIndex;
       itemWidth = tposeanime_itemWidth;
     }
-    const offset = -currentIndex * (itemWidth + 20); // 包括 margin-right
-    carousel.style.transform = `translateX(${offset}px)`;
+    const offset = currentIndex * itemWidth;
+    carousel.style.transform = `translateX(-${offset}px)`;
   }
-  
-  window.addEventListener('resize', () => {
-    const carouselContainerText2Anime = document.querySelector('.carousel-container');
-    text2anime_itemWidth = document.querySelector('.video-item').offsetWidth;
-    text2anime_visibleItems = Math.floor(carouselContainerText2Anime.offsetWidth / text2anime_itemWidth);
-  
-    const carouselContainerTpose = document.querySelector('#anime-image-input .carousel-container');
-    tposeanime_itemWidth = document.querySelector('.video-item').offsetWidth;
-    tposeanime_visibleItems = Math.floor(carouselContainerTpose.offsetWidth / tposeanime_itemWidth);
-  
-    updateCarouselPosition('text2anime');
-    updateCarouselPosition('tposeanime');
-  });
   </script>
   
-
-
 
 
 <!--anypose anime 2 anime -->
