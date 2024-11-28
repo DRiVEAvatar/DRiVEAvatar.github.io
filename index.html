@@ -322,7 +322,7 @@
         <h1 class="title is-2">Anime Character Generation Results</h1>
         <h2 class="title is-3">Text Input Results</h2>
         <p class="content has-text-justified">
-          Explore how simple text descriptions transform into dynamic anime-style animations. Here are some examples of our model in action:
+          Explore how simple text descriptions transform into anime-style 3D characters:
         </p>
       </div>
     </div>
@@ -348,7 +348,7 @@
       <div class="column is-four-fifths">
         <h1 class="title is-2">Anime Image Input Results</h1>
         <p class="content has-text-justified">
-          Below are examples where an anime-style image input is transformed into corresponding animated videos:
+          Below are examples where an anime-style image input is transformed into 3D characters:
         </p>
       </div>
     </div>
@@ -366,172 +366,61 @@
     <button class="carousel-button right" onclick="carouselScrollRight('tposeanime')">&#9654;</button>
   </div>
 </section>
-<!-- 
-<script>
-let text2anime_currentIndex = 0;
-let text2anime_itemWidth;
-let text2anime_visibleItems;
-let tposeanime_currentIndex = 0;
-let tposeanime_itemWidth;
-let tposeanime_visibleItems;
-
-document.addEventListener('DOMContentLoaded', function () {
-  // 加载 Text2Anime 数据并填充视频项
-  fetch('./static/videos/text2anime/prompts.json')
-    .then(response => response.json())
-    .then(data => {
-      const carouselText2Anime = document.getElementById('carousel-text2anime');
-      const shuffledData = data.sort(() => Math.random() - 0.5);
-
-      shuffledData.forEach(entry => {
-        entry.videos.forEach(videoFile => {
-          const videoItem = document.createElement('div');
-          videoItem.classList.add('video-item');
-
-          const videoElement = document.createElement('video');
-          videoElement.src = `./static/videos/text2anime/${videoFile}`;
-          videoElement.autoplay = true;
-          videoElement.muted = true;
-          videoElement.loop = true;
-          videoElement.playsInline = true;
-
-          const textPrompt = document.createElement('div');
-          textPrompt.classList.add('text-prompt');
-          textPrompt.textContent = entry.prompt;
-
-          videoItem.appendChild(videoElement);
-          videoItem.appendChild(textPrompt);
-          carouselText2Anime.appendChild(videoItem);
-        });
-      });
-
-      // 等待所有元素渲染完成后再计算尺寸
-      setTimeout(() => {
-        const carouselContainer = document.querySelector('.carousel-container');
-        updateText2AnimeDimensions(carouselContainer);
-        setInterval(() => {
-          carouselScrollRight('text2anime');
-        }, 5000);
-      }, 100);  // 等待 100 毫秒，确保所有项目渲染完成
-    })
-    .catch(error => console.error('Error loading video prompts:', error));
-
-  // 加载 TposeAnime 数据并填充图片与视频项
-  const container = document.querySelector("#anime-image-input .carousel");
-  const totalExamples = 16;  // 你可以根据实际情况调整这个值
-  for (let i = 1; i <= totalExamples; i++) {
-    const videoItem = document.createElement('div');
-    videoItem.classList.add('video-item');
-
-    const figure = document.createElement("figure");
-    figure.classList.add("image");
-
-    const img = document.createElement("img");
-    img.src = `./static/images/Tpose_anime_inputs/${i}.png`;
-    img.alt = `Input Image ${i}`;
-
-    figure.appendChild(img);
-
-    const video = document.createElement("video");
-    video.loop = true;
-    video.autoplay = true;
-    video.muted = true;
-    video.playsInline = true;
-
-    const source = document.createElement("source");
-    source.src = `./static/images/Tpose_anime_inputs/${i}.mp4`;
-    source.type = "video/mp4";
-
-    video.appendChild(source);
-
-    videoItem.appendChild(figure);
-    videoItem.appendChild(video);
-
-    container.appendChild(videoItem);
-  }
-
-  setTimeout(() => {
-    const carouselContainerTpose = document.querySelector('#anime-image-input .carousel-container');
-    updateTposeAnimeDimensions(carouselContainerTpose);
-    setInterval(() => {
-      carouselScrollRight('tposeanime');
-    }, 5000);
-  }, 100);  // 等待 100 毫秒，确保所有项目渲染完成
-});
 
 
-function updateText2AnimeDimensions(carouselContainer) {
-  text2anime_itemWidth = document.querySelector('.video-item').offsetWidth;
-  console.log('Item Width:', text2anime_itemWidth);  // 打印每个项的宽度
-  text2anime_visibleItems = Math.floor(carouselContainer.offsetWidth / text2anime_itemWidth);
-  console.log('Visible Items:', text2anime_visibleItems);  // 打印可见项数量
-  updateCarouselPosition('text2anime');
-}
+<!-- AnyPoseAnime Image 部分 -->
+<section class="section" id="anyposeanime-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h1 class="title is-2">AnyPose Anime Input Results</h1>
+        <p class="content has-text-justified">
+          Below are examples where AnyPose inputs are transformed into anime-style 3D characters:
+        </p>
+      </div>
+    </div>
 
-function updateTposeAnimeDimensions(carouselContainer) {
-  tposeanime_itemWidth = document.querySelector('.video-item').offsetWidth;
-  console.log('Item Width:', tposeanime_itemWidth);  // 打印每个项的宽度
-  tposeanime_visibleItems = Math.floor(carouselContainer.offsetWidth / tposeanime_itemWidth);
-  console.log('Visible Items:', tposeanime_visibleItems);  // 打印可见项数量
-  updateCarouselPosition('tposeanime');
-}
+    <!-- 左侧按钮 -->
+    <button class="carousel-button left" onclick="carouselScrollLeft('anyposeanime')">&#9664;</button>
 
-// 滑动到左侧
-function carouselScrollLeft(type) {
-  let maxIndex, currentIndex;
-  if (type === 'text2anime') {
-    maxIndex = text2anime_visibleItems - 1;
-    text2anime_currentIndex = (text2anime_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
-    currentIndex = text2anime_currentIndex;
-  } else if (type === 'tposeanime') {
-    maxIndex = tposeanime_visibleItems - 1;
-    tposeanime_currentIndex = (tposeanime_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
-    currentIndex = tposeanime_currentIndex;
-  }
-  updateCarouselPosition(type, currentIndex);
-}
+    <div class="carousel-container">
+      <div class="carousel" id="carousel-anyposeanime">
+        <!-- JavaScript will dynamically insert video-image pairs here -->
+      </div>
+    </div>
 
-// 滑动到右侧
-function carouselScrollRight(type) {
-  let maxIndex, currentIndex;
-  if (type === 'text2anime') {
-    maxIndex = text2anime_visibleItems - 1;
-    text2anime_currentIndex = (text2anime_currentIndex + 1) % (maxIndex + 1);
-    currentIndex = text2anime_currentIndex;
-  } else if (type === 'tposeanime') {
-    maxIndex = tposeanime_visibleItems - 1;
-    tposeanime_currentIndex = (tposeanime_currentIndex + 1) % (maxIndex + 1);
-    currentIndex = tposeanime_currentIndex;
-  }
-  updateCarouselPosition(type, currentIndex);
-}
+    <!-- 右侧按钮 -->
+    <button class="carousel-button right" onclick="carouselScrollRight('anyposeanime')">&#9654;</button>
+  </div>
+</section>
 
-// 更新 Carousel 位置
-function updateCarouselPosition(type, currentIndex) {
-  let carousel, itemWidth;
-  if (type === 'text2anime') {
-    carousel = document.getElementById('carousel-text2anime');
-    itemWidth = text2anime_itemWidth;
-  } else if (type === 'tposeanime') {
-    carousel = document.getElementById('carousel-tposeanime');
-    itemWidth = tposeanime_itemWidth;
-  }
-  const offset = -currentIndex * (itemWidth + 20); // 包括 margin-right
-  carousel.style.transform = `translateX(${offset}px)`;
-}
+<!-- RealHuman Image 部分 -->
+<section class="section" id="realhuman-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h1 class="title is-2">Real Human Input Results</h1>
+        <p class="content has-text-justified">
+          Below are examples where RealHuman inputs are transformed into realistic 3D characters:
+        </p>
+      </div>
+    </div>
 
-// 监听窗口大小变化
-window.addEventListener('resize', () => {
-  const carouselContainerText2Anime = document.querySelector('.carousel-container');
-  updateText2AnimeDimensions(carouselContainerText2Anime);
+    <!-- 左侧按钮 -->
+    <button class="carousel-button left" onclick="carouselScrollLeft('realhuman')">&#9664;</button>
 
-  const carouselContainerTpose = document.querySelector('#anime-image-input .carousel-container');
-  updateTposeAnimeDimensions(carouselContainerTpose);
-});
-</script> -->
+    <div class="carousel-container">
+      <div class="carousel" id="carousel-realhuman">
+        <!-- JavaScript will dynamically insert video-image pairs here -->
+      </div>
+    </div>
+
+    <!-- 右侧按钮 -->
+    <button class="carousel-button right" onclick="carouselScrollRight('realhuman')">&#9654;</button>
+  </div>
+</section>
 
 
-  
 <script>
   let text2anime_currentIndex = 0;
   let text2anime_itemWidth;
@@ -539,6 +428,12 @@ window.addEventListener('resize', () => {
   let tposeanime_currentIndex = 0;
   let tposeanime_itemWidth;
   let tposeanime_visibleItems;
+  let anyposeanime_currentIndex = 0;
+  let anyposeanime_itemWidth;
+  let anyposeanime_visibleItems;
+  let realhuman_currentIndex = 0;
+  let realhuman_itemWidth;
+  let realhuman_visibleItems;
   
   document.addEventListener('DOMContentLoaded', function () {
     // 加载 Text2Anime 数据并填充视频项
@@ -622,20 +517,115 @@ window.addEventListener('resize', () => {
         carouselScrollRight('tposeanime');
       }, 5000);
     }, 100);  // 等待 100 毫秒，确保所有项目渲染完成
+
+
+    // 加载 AnyPoseAnime 数据并填充图片与视频项
+    const anyPoseContainer = document.querySelector("#anyposeanime-section .carousel");
+    for (let i = 1; i <= 12; i++) {
+      const videoItem = document.createElement('div');
+      videoItem.classList.add('video-item');
+
+      const figure = document.createElement("figure");
+      figure.classList.add("image");
+
+      const img = document.createElement("img");
+      img.src = `./static/images/AnyPose_anime_inputs/${i}.png`;
+      img.alt = `Input Image ${i}`;
+
+      figure.appendChild(img);
+
+      const video = document.createElement("video");
+      video.loop = true;
+      video.autoplay = true;
+      video.muted = true;
+      video.playsInline = true;
+
+      const source = document.createElement("source");
+      source.src = `./static/images/AnyPose_anime_inputs/${i}.mp4`;
+      source.type = "video/mp4";
+
+      video.appendChild(source);
+
+      videoItem.appendChild(figure);
+      videoItem.appendChild(video);
+
+      anyPoseContainer.appendChild(videoItem);
+    }
+
+    setTimeout(() => {
+      const carouselContainerAnyPose = document.querySelector('#anyposeanime-section .carousel-container');
+      updateAnyPoseAnimeDimensions(carouselContainerAnyPose);
+      setInterval(() => {
+        carouselScrollRight('anyposeanime');
+      }, 5000);
+    }, 100);
+
+    // 加载 RealHuman 数据并填充图片与视频项
+    const realHumanContainer = document.querySelector("#realhuman-section .carousel");
+    for (let i = 1; i <= 30; i++) {
+      const videoItem = document.createElement('div');
+      videoItem.classList.add('video-item');
+
+      const figure = document.createElement("figure");
+      figure.classList.add("image");
+
+      const img = document.createElement("img");
+      img.src = `./static/images/RealHuman_anime_inputs/${i}.png`;
+      img.alt = `Input Image ${i}`;
+
+      figure.appendChild(img);
+
+      const video = document.createElement("video");
+      video.loop = true;
+      video.autoplay = true;
+      video.muted = true;
+      video.playsInline = true;
+
+      const source = document.createElement("source");
+      source.src = `./static/images/RealHuman_anime_inputs/${i}.mp4`;
+      source.type = "video/mp4";
+
+      video.appendChild(source);
+
+      videoItem.appendChild(figure);
+      videoItem.appendChild(video);
+
+      realHumanContainer.appendChild(videoItem);
+    }
+
+    setTimeout(() => {
+      const carouselContainerRealHuman = document.querySelector('#realhuman-section .carousel-container');
+      updateRealHumanDimensions(carouselContainerRealHuman);
+      setInterval(() => {
+        carouselScrollRight('realhuman');
+      }, 5000);
+    }, 100);
+
+
   });
   
   function updateText2AnimeDimensions(carouselContainer) {
-    // 重新计算每个项目的宽度，并获取容器可见项数
     text2anime_itemWidth = document.querySelector('.video-item').offsetWidth;
     text2anime_visibleItems = Math.floor(carouselContainer.offsetWidth / text2anime_itemWidth);
     updateCarouselPosition('text2anime');
   }
-  
+
   function updateTposeAnimeDimensions(carouselContainer) {
-    // 重新计算每个项目的宽度，并获取容器可见项数
     tposeanime_itemWidth = document.querySelector('.video-item').offsetWidth;
     tposeanime_visibleItems = Math.floor(carouselContainer.offsetWidth / tposeanime_itemWidth);
     updateCarouselPosition('tposeanime');
+  }
+
+  function updateAnyPoseAnimeDimensions(carouselContainer) {
+    anyposeanime_itemWidth = document.querySelector('.video-item').offsetWidth;
+    anyposeanime_visibleItems = Math.floor(carouselContainer.offsetWidth / anyposeanime_itemWidth);
+    updateCarouselPosition('anyposeanime');
+  }
+
+  function updateRealHumanDimensions(carouselContainer) {
+    realhuman_itemWidth = document.querySelector('.video-item').offsetWidth;
+    realhuman_visibleItems = Math.floor(carouselContainer.offsetWidth / realhuman_itemWidth);
+    updateCarouselPosition('realhuman');
   }
   
   function carouselScrollLeft(type) {
@@ -648,10 +638,18 @@ window.addEventListener('resize', () => {
       maxIndex = document.querySelectorAll('#carousel-tposeanime .video-item').length - tposeanime_visibleItems;
       tposeanime_currentIndex = (tposeanime_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
       currentIndex = tposeanime_currentIndex;
+    } else if (type === 'anyposeanime') {
+      maxIndex = document.querySelectorAll('#carousel-anyposeanime .video-item').length - anyposeanime_visibleItems;
+      anyposeanime_currentIndex = (anyposeanime_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
+      currentIndex = anyposeanime_currentIndex;
+    } else if (type === 'realhuman') {
+      maxIndex = document.querySelectorAll('#carousel-realhuman .video-item').length - realhuman_visibleItems;
+      realhuman_currentIndex = (realhuman_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
+      currentIndex = realhuman_currentIndex;
     }
     updateCarouselPosition(type, currentIndex);
   }
-  
+
   function carouselScrollRight(type) {
     let maxIndex, currentIndex;
     if (type === 'text2anime') {
@@ -662,10 +660,18 @@ window.addEventListener('resize', () => {
       maxIndex = document.querySelectorAll('#carousel-tposeanime .video-item').length - tposeanime_visibleItems;
       tposeanime_currentIndex = (tposeanime_currentIndex + 1) % (maxIndex + 1);
       currentIndex = tposeanime_currentIndex;
+    } else if (type === 'anyposeanime') {
+      maxIndex = document.querySelectorAll('#carousel-anyposeanime .video-item').length - anyposeanime_visibleItems;
+      anyposeanime_currentIndex = (anyposeanime_currentIndex + 1) % (maxIndex + 1);
+      currentIndex = anyposeanime_currentIndex;
+    } else if (type === 'realhuman') {
+      maxIndex = document.querySelectorAll('#carousel-realhuman .video-item').length - realhuman_visibleItems;
+      realhuman_currentIndex = (realhuman_currentIndex + 1) % (maxIndex + 1);
+      currentIndex = realhuman_currentIndex;
     }
     updateCarouselPosition(type, currentIndex);
   }
-  
+
   function updateCarouselPosition(type, currentIndex) {
     let carousel, itemWidth;
     if (type === 'text2anime') {
@@ -674,12 +680,21 @@ window.addEventListener('resize', () => {
     } else if (type === 'tposeanime') {
       carousel = document.getElementById('carousel-tposeanime');
       itemWidth = tposeanime_itemWidth;
+    } else if (type === 'anyposeanime') {
+      carousel = document.getElementById('carousel-anyposeanime');
+      itemWidth = anyposeanime_itemWidth;
+    } else if (type === 'realhuman') {
+      carousel = document.getElementById('carousel-realhuman');
+      itemWidth = realhuman_itemWidth;
     }
     const offset = currentIndex * itemWidth;
     carousel.style.transform = `translateX(-${offset}px)`;
   }
+
   </script>
   
+
+
 
 
 <!--anypose anime 2 anime -->
@@ -688,7 +703,7 @@ window.addEventListener('resize', () => {
 
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Any Pose Anime Input</h2>
+        <h2 class="title is-3">Any Pose Anime Input Comparison</h2>
         
         <!-- 这里放ours 的结果 -->
         
