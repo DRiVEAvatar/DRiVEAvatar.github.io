@@ -101,10 +101,10 @@
             <a href="https://driveavatar.github.io/" target="_blank" style="text-decoration: none; color: inherit;">
               <!-- <span class="title is-1 publication-title">DRiVE</span>: -->
               <span class="title is-1 publication-title gradient-text-drive">DRiVE</span>:
-              <span style="text-decoration: underline; text-decoration-skip-ink: none;">D</span>iffusion-based 
-              <span style="text-decoration: underline; text-decoration-skip-ink: none;">Ri</span>gging Empowers Generation of 
-              <span style="text-decoration: underline; text-decoration-skip-ink: none;">V</span>ersatile and 
-              <span style="text-decoration: underline; text-decoration-skip-ink: none;">E</span>xpressive Characters
+              <span class="title is-1" style="text-decoration: underline; text-decoration-skip-ink: none;">D</span>iffusion-based 
+              <span class="title is-1" style="text-decoration: underline; text-decoration-skip-ink: none;">Ri</span>gging Empowers Generation of 
+              <span class="title is-1" style="text-decoration: underline; text-decoration-skip-ink: none;">V</span>ersatile and 
+              <span class="title is-1" style="text-decoration: underline; text-decoration-skip-ink: none;">E</span>xpressive Characters
             </a>
           </h1>
           
@@ -169,7 +169,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2411.17423v1"
+                <a href="https://arxiv.org/pdf/2411.17423"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -178,7 +178,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="http://arxiv.org/abs/2411.17423v1"
+                <a href="http://arxiv.org/abs/2411.17423"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -213,10 +213,22 @@
                   <span class="icon">
                       <i class="far fa-images"></i>
                   </span>
-                  <span>Data (coming soon)</span>
+                  <span>Dataset (coming soon)</span>
                   </a>
               </span>
             </div>
+            <!-- Demo Link. -->
+            <span class="link-block">
+              <a href="https://github.com/DRiVEAvatar/DRiVEAvatar.github.io" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <img src="./static/images/hf.png">
+                </span>
+                <span>Demo (coming soon)</span>
+                </a>
+            </span>
+
+            
+          </div>
 
           </div>
         </div>
@@ -306,11 +318,14 @@
 
 </style>
 
+<!-- Text2Anime 部分 -->
 <section class="section" id="text2anime-section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Text Input</h2>
+        <br><br>
+        <h1 class="title is-2">Anime Character Generation Results</h1>
+        <h2 class="title is-3">Text Input Results</h2>
         <p class="content has-text-justified">
           Explore how simple text descriptions transform into dynamic anime-style animations. Here are some examples of our model in action:
         </p>
@@ -318,107 +333,256 @@
     </div>
 
     <!-- 左侧按钮 -->
-    <button class="carousel-button left" onclick="carouselScrollLeft()">&#9664;</button>
+    <button class="carousel-button left" onclick="carouselScrollLeft('text2anime')">&#9664;</button>
 
     <div class="carousel-container">
-      <div class="carousel" id="carousel">
+      <div class="carousel" id="carousel-text2anime">
         <!-- JavaScript 将在此处动态插入视频项 -->
       </div>
     </div>
 
     <!-- 右侧按钮 -->
-    <button class="carousel-button right" onclick="carouselScrollRight()">&#9654;</button>
+    <button class="carousel-button right" onclick="carouselScrollRight('text2anime')">&#9654;</button>
   </div>
 </section>
 
-<script>
-  let currentIndex = 0;
-  let itemWidth;
-  let shuffledVideos = [];
-  let visibleItems;
+<!-- TposeAnime Image 部分 -->
+<section class="section" id="anime-image-input">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h1 class="title is-2">Anime Image Input Results</h1>
+        <p class="content has-text-justified">
+          Below are examples where an anime-style image input is transformed into corresponding animated videos:
+        </p>
+      </div>
+    </div>
 
-  fetch('./static/videos/text2anime/prompts.json')
-    .then(response => response.json())
-    .then(data => {
-      const carousel = document.getElementById('carousel');
+    <!-- 左侧按钮 -->
+    <button class="carousel-button left" onclick="carouselScrollLeft('tposeanime')">&#9664;</button>
 
-      data.forEach(entry => {
-        entry.videos.forEach(videoFile => {
-          shuffledVideos.push({
-            prompt: entry.prompt,
-            video: `./static/videos/text2anime/${videoFile}`
-          });
-        });
-      });
+    <div class="carousel-container">
+      <div class="carousel" id="carousel-tposeanime">
+        <!-- JavaScript will dynamically insert video-image pairs here -->
+      </div>
+    </div>
 
-      shuffledVideos = shuffledVideos.sort(() => Math.random() - 0.5);
-
-      shuffledVideos.forEach(item => {
-        const videoItem = document.createElement('div');
-        videoItem.classList.add('video-item');
-
-        const videoElement = document.createElement('video');
-        videoElement.src = item.video;
-        videoElement.autoplay = true;
-        videoElement.muted = true;
-        videoElement.loop = true;
-        videoElement.playsInline = true;
-
-        const textPrompt = document.createElement('div');
-        textPrompt.classList.add('text-prompt');
-        textPrompt.textContent = item.prompt;
-
-        videoItem.appendChild(videoElement);
-        videoItem.appendChild(textPrompt);
-
-        carousel.appendChild(videoItem);
-      });
-
-      // 在视频项加载完成后，更新itemWidth和visibleItems
-      const carouselContainer = document.querySelector('.carousel-container');
-      const containerWidth = carouselContainer.offsetWidth;
-
-      itemWidth = document.querySelector('.video-item').offsetWidth;
-      visibleItems = Math.floor(containerWidth / itemWidth);
-
-      // 自动滚动效果
-      setInterval(() => {
-        carouselScrollRight();
-      }, 5000);
-    })
-    .catch(error => console.error('Error loading video prompts:', error));
-
-    function carouselScrollLeft() {
-      const maxIndex = shuffledVideos.length - visibleItems;
-      currentIndex = (currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
-      updateCarouselPosition();
-    }
+    <!-- 右侧按钮 -->
+    <button class="carousel-button right" onclick="carouselScrollRight('tposeanime')">&#9654;</button>
+  </div>
+</section>
 
 
-    function carouselScrollRight() {
-      const maxIndex = shuffledVideos.length - visibleItems;
-      currentIndex = (currentIndex + 1) % (maxIndex + 1);
-      updateCarouselPosition();
-    }
-
-
-  function updateCarouselPosition() {
-    const carousel = document.getElementById('carousel');
-    const offset = -currentIndex * (itemWidth + 20); // 如果保留margin-right
-    carousel.style.transform = `translateX(${offset}px)`;
+<style>
+  /* 外层容器样式 */
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  // 窗口大小改变时，重新计算visibleItems
-  window.addEventListener('resize', () => {
-    const carouselContainer = document.querySelector('.carousel-container');
-    const containerWidth = carouselContainer.offsetWidth;
-    itemWidth = document.querySelector('.video-item').offsetWidth;
-    visibleItems = Math.floor(containerWidth / itemWidth);
+  /* 内部滑动容器 */
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
 
-    // 更新位置，防止出现空白
-    updateCarouselPosition();
+  /* 单个视频项 */
+  .video-item {
+    flex: 0 0 300px;
+    margin-right: 20px;
+    text-align: center;
+  }
+
+  /* 图片和视频对齐 */
+  .video-item img,
+  .video-item video {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  /* 左右箭头按钮 */
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #333;
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .carousel-button.left {
+    left: -30px;
+  }
+  .carousel-button.right {
+    right: -30px;
+  }
+
+</style>
+
+
+
+<script>
+  let text2anime_currentIndex = 0;
+  let text2anime_itemWidth;
+  let text2anime_visibleItems;
+  
+  let tposeanime_currentIndex = 0;
+  let tposeanime_itemWidth;
+  let tposeanime_visibleItems;
+  
+  document.addEventListener('DOMContentLoaded', function () {
+    // Text2Anime 部分加载
+    fetch('./static/videos/text2anime/prompts.json')
+      .then(response => response.json())
+      .then(data => {
+        const carouselText2Anime = document.getElementById('carousel-text2anime');
+  
+        // 随机打乱 JSON 数据中的案例顺序
+        const shuffledData = data.sort(() => Math.random() - 0.5);
+  
+        shuffledData.forEach(entry => {
+          entry.videos.forEach(videoFile => {
+            const videoItem = document.createElement('div');
+            videoItem.classList.add('video-item');
+  
+            const videoElement = document.createElement('video');
+            videoElement.src = `./static/videos/text2anime/${videoFile}`;
+            videoElement.autoplay = true;
+            videoElement.muted = true;
+            videoElement.loop = true;
+            videoElement.playsInline = true;
+  
+            const textPrompt = document.createElement('div');
+            textPrompt.classList.add('text-prompt');
+            textPrompt.textContent = entry.prompt;
+  
+            videoItem.appendChild(videoElement);
+            videoItem.appendChild(textPrompt);
+            carouselText2Anime.appendChild(videoItem);
+          });
+        });
+  
+        // 更新 visibleItems 和 itemWidth
+        const carouselContainer = document.querySelector('.carousel-container');
+        text2anime_itemWidth = document.querySelector('.video-item').offsetWidth;
+        text2anime_visibleItems = Math.floor(carouselContainer.offsetWidth / text2anime_itemWidth);
+  
+        setInterval(() => {
+          carouselScrollRight('text2anime');
+        }, 5000);
+      })
+      .catch(error => console.error('Error loading video prompts:', error));
+  
+    // TposeAnime 部分加载
+    const container = document.querySelector("#anime-image-input .carousel");
+    const totalExamples = 16;
+    for (let i = 1; i <= totalExamples; i++) {
+      const videoItem = document.createElement('div');
+      videoItem.classList.add('video-item');
+  
+      const figure = document.createElement("figure");
+      figure.classList.add("image");
+  
+      const img = document.createElement("img");
+      img.src = `./static/images/Tpose_anime_inputs/${i}.png`;
+      img.alt = `Input Image ${i}`;
+  
+      figure.appendChild(img);
+  
+      const video = document.createElement("video");
+      video.loop = true;
+      video.autoplay = true;
+      video.muted = true;
+      video.playsInline = true;
+  
+      const source = document.createElement("source");
+      source.src = `./static/images/Tpose_anime_inputs/${i}.mp4`;
+      source.type = "video/mp4";
+  
+      video.appendChild(source);
+  
+      videoItem.appendChild(figure);
+      videoItem.appendChild(video);
+  
+      container.appendChild(videoItem);
+    }
+  
+    // 更新 TposeAnime 部分的 itemWidth 和 visibleItems
+    const carouselContainerTpose = document.querySelector('#anime-image-input .carousel-container');
+    tposeanime_itemWidth = document.querySelector('.video-item').offsetWidth;
+    tposeanime_visibleItems = Math.floor(carouselContainerTpose.offsetWidth / tposeanime_itemWidth);
+  
+    setInterval(() => {
+      carouselScrollRight('tposeanime');
+    }, 5000);
   });
-</script>
+  
+  function carouselScrollLeft(type) {
+    if (type === 'text2anime') {
+      const maxIndex = text2anime_visibleItems - 1;
+      text2anime_currentIndex = (text2anime_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
+      updateCarouselPosition('text2anime');
+    } else if (type === 'tposeanime') {
+      const maxIndex = tposeanime_visibleItems - 1;
+      tposeanime_currentIndex = (tposeanime_currentIndex - 1 + maxIndex + 1) % (maxIndex + 1);
+      updateCarouselPosition('tposeanime');
+    }
+  }
+  
+  function carouselScrollRight(type) {
+    if (type === 'text2anime') {
+      const maxIndex = text2anime_visibleItems - 1;
+      text2anime_currentIndex = (text2anime_currentIndex + 1) % (maxIndex + 1);
+      updateCarouselPosition('text2anime');
+    } else if (type === 'tposeanime') {
+      const maxIndex = tposeanime_visibleItems - 1;
+      tposeanime_currentIndex = (tposeanime_currentIndex + 1) % (maxIndex + 1);
+      updateCarouselPosition('tposeanime');
+    }
+  }
+  
+  function updateCarouselPosition(type) {
+    let carousel;
+    let currentIndex;
+    let itemWidth;
+    if (type === 'text2anime') {
+      carousel = document.getElementById('carousel-text2anime');
+      currentIndex = text2anime_currentIndex;
+      itemWidth = text2anime_itemWidth;
+    } else if (type === 'tposeanime') {
+      carousel = document.getElementById('carousel-tposeanime');
+      currentIndex = tposeanime_currentIndex;
+      itemWidth = tposeanime_itemWidth;
+    }
+    const offset = -currentIndex * (itemWidth + 20); // 包括 margin-right
+    carousel.style.transform = `translateX(${offset}px)`;
+  }
+  
+  window.addEventListener('resize', () => {
+    const carouselContainerText2Anime = document.querySelector('.carousel-container');
+    text2anime_itemWidth = document.querySelector('.video-item').offsetWidth;
+    text2anime_visibleItems = Math.floor(carouselContainerText2Anime.offsetWidth / text2anime_itemWidth);
+  
+    const carouselContainerTpose = document.querySelector('#anime-image-input .carousel-container');
+    tposeanime_itemWidth = document.querySelector('.video-item').offsetWidth;
+    tposeanime_visibleItems = Math.floor(carouselContainerTpose.offsetWidth / tposeanime_itemWidth);
+  
+    updateCarouselPosition('text2anime');
+    updateCarouselPosition('tposeanime');
+  });
+  </script>
+  
+
+
 
 
 <!--anypose anime 2 anime -->
@@ -501,6 +665,12 @@
     
     </div>
 </section>
+
+
+
+<!-- real human image input -->
+
+
 
 
 <!-- bibtex -->
