@@ -334,6 +334,12 @@
     height: 100%;  /* 确保文本的高度与视频项一致 */
     box-sizing: border-box;  /* 包括内边距和边框在内的总高度 */
   }
+
+  .text-prompt-t2a {
+    margin-top: 10px;
+    word-wrap: break-word;
+    white-space: normal;
+  }
   
   /* 使 video 和 img 具有相同的最大高度 */
   .video-item video, .video-item .image img {
@@ -643,7 +649,7 @@
             videoElement.playsInline = true;
   
             const textPrompt = document.createElement('div');
-            textPrompt.classList.add('text-prompt');
+            textPrompt.classList.add('text-prompt-t2a');
             textPrompt.textContent = entry.prompt;
   
             videoItem.appendChild(videoElement);
